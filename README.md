@@ -1,46 +1,62 @@
-# The Missing Semester of Your CS Education 
+# The Missing Semester of Your CS Education Chinese (Simplified) Translation
 
-Website for the [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/) class!
+大学里的计算机课程通常专注于讲授从操作系统到机器学习这些学院派的课程或主题，而对于如何精通工具这一主题则往往会留给学生自行探索。在这个系列课程中，我们讲授命令行、强大的文本编辑器的使用、使用版本控制系统提供的多种特性等等。学生在他们受教育阶段就会和这些工具朝夕相处（在他们的职业生涯中更是这样）。
 
-[中文站点](https://missing-semester-cn.github.io)(<span style="float:right"><img src = "https://img.shields.io/badge/最近一次与英文版同步-2021--04--24-green"></span>)
+因此，花时间打磨使用这些工具的能力并能够最终熟练地、流畅地使用它们是非常有必要的。
 
+精通这些工具不仅可以帮助您更快的使用工具完成任务，并且可以帮助您解决在之前看来似乎无比复杂的问题。
 
-Contributions are most welcome! If you have edits or new content to add, please open an issue or submit a pull request.
+关于 [开设此课程的动机](about.md)。
 
-## Development
+## 日程
 
-To build and view the site locally, run:
+- 1/13: 课程概览与 shell
+- 1/14: Shell 工具和脚本  
+- 1/15: 编辑器 (Vim)  
+- 1/16: 数据整理  
+- 1/21: 命令行环境  
+- 1/22: 版本控制(Git)  
+- 1/23: 调试及性能分析  
+- 1/27: 元编程  
+- 1/28: 安全和密码学  
+- 1/29: 大杂烩  
+- 1/30: 提问&回答
 
-```bash
-bundle exec jekyll serve -w
-```
+讲座视频可以在 [YouTube](https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J) 上找到。
 
-## License
+## 关于本课程
 
-All the content in this course, including the website source code, lecture notes, exercises, and lecture videos is licensed under Attribution-NonCommercial-ShareAlike 4.0 International [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). See [here](https://missing.csail.mit.edu/license) for more information on contributions or translations.
+**教员**：本课程由 [Anish](https://www.anishathalye.com/)、[Jon](https://thesquareplanet.com/) 和 [Jose](http://josejg.com/) 讲授。
+**问题**：请通过 [missing-semester@mit.edu](mailto:missing-semester@mit.edu) 联系我们。
 
------------------
+## 在 MIT 之外
 
-## Project Status
+我们也将本课程分享到了 MIT 之外，希望其他人也能受益于这些资源。您可以在下面这些地方找到相关文章和讨论。
 
-To contribute to this tanslation project, please book your topic by creating an issue and I will update this table accordingly to avoid rework.
+- [Hacker News](https://news.ycombinator.com/item?id=22226380)
+- [Lobsters](https://lobste.rs/s/ti1k98/missing_semester_your_cs_education_mit)
+- [/r/learnprogramming](https://www.reddit.com/r/learnprogramming/comments/eyagda/the_missing_semester_of_your_cs_education_mit/)
+- [/r/programming](https://www.reddit.com/r/programming/comments/eyagcd/the_missing_semester_of_your_cs_education_mit/)
+- [Twitter](https://twitter.com/jonhoo/status/1224383452591509507)
+- [YouTube](https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J)
 
-|  lectures   | translator  | status |
-|  ----  | ----  |----  |
-| [course-shell.md](_2020/course-shell.md)  | [@Lingfeng AI](https://github.com/hanxiaomax) | Done |
-| [shell-tools.md](_2020/shell-tools.md)  | [@Lingfeng AI](https://github.com/hanxiaomax) | Done |
-| [editors.md](_2020/editors.md)  |  [@stechu](https://github.com/stechu) | Done |
-| [data-wrangling.md](_2020/data-wrangling.md)  | [@Lingfeng AI](https://github.com/hanxiaomax) | Done |
-| [command-line.md](_2020/command-line.md)  | [@Lingfeng AI](https://github.com/hanxiaomax) | Done |
-| [version-control.md](_2020/version-control.md)  | [@Lingfeng AI](https://github.com/hanxiaomax) | Done |
-| [debugging-profiling.md](_2020/debugging-profiling.md)  |[@Lingfeng AI](https://github.com/hanxiaomax)  | Done  |
-| [metaprogramming.md](_2020/metaprogramming.md)  | [@Lingfeng AI](https://github.com/hanxiaomax) | Done |
-| [security.md](_2020/security.md)  | [@catcarbon](https://github.com/catcarbon) | Done |
-| [potpourri.md](_2020/potpourri.md) |  [@catcarbon](https://github.com/catcarbon) | Done |
-| [qa.md](_2020/qa.md) | [@AA1HSHH](https://github.com/AA1HSHH) | Done |
-| [about.md](about.md)  | [@Binlogo](https://github.com/Binlogo)  | Done |
+## 译文
 
+- [English](https://missing.csail.mit.edu)
+- [繁体中文](https://missing-semester-zh-hant.github.io/)
+- [Japanese](https://missing-semester-jp.github.io/)
+- [Korean](https://missing-semester-kr.github.io/)
+- [Portuguese](https://missing-semester-pt.github.io/)
+- [Russian](https://missing-semester-rus.github.io/)
+- [Serbian](https://netboxify.com/missing-semester/)
+- [Spanish](https://missing-semester-esp.github.io/)
+- [Turkish](https://missing-semester-tr.github.io/)
+- [Vietnamese](https://missing-semester-vn.github.io/)
 
-## 新项目
+注意：上述链接为社区翻译，我们并未验证其内容。
 
-[Learncpp中文版](https://github.com/hanxiaomax/Learncpp_CN)
+## 致谢
+
+感谢 Elaine Mello, Jim Cain 以及 [MIT Open Learning](https://openlearning.mit.edu/) 帮助我们录制讲座视频。
+感谢 Anthony Zolnik 和 [MIT AeroAstro](https://aeroastro.mit.edu/) 提供 A/V 设备。
+感谢 Brandi Adams 和 [MIT EECS](https://www.eecs.mit.edu/) 对本课程的支持。
