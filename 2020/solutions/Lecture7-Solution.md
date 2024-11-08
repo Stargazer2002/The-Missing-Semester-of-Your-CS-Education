@@ -23,7 +23,7 @@
     ```
 
 2. 学习 [这份](https://github.com/spiside/pdb-tutorial) `pdb` 实践教程并熟悉相关的命令。更深入的信息您可以参考 [这份](https://realpython.com/python-debugging-pdb) 教程。
-3. 安装 [`shellcheck`](https://www.shellcheck.net/) 并尝试对下面的脚本进行检查。这段代码有什么问题吗？请修复相关问题。在您的编辑器中安装一个 linter 插件，这样它就可以自动地显示相关警告信息。
+3. 安装 [shellcheck](https://www.shellcheck.net/) 并尝试对下面的脚本进行检查。这段代码有什么问题吗？请修复相关问题。在您的编辑器中安装一个 linter 插件，这样它就可以自动地显示相关警告信息。
 
    ```bash
    #!/bin/sh
@@ -47,8 +47,7 @@
     然后在 vim 执行 `:PlugInstall` 安装插件
     ![1.png](images/7/2.png)
     在需要检查的 shell 脚本中，执行 `:Neomake` 即可进行 shellcheck 检查。然后光标移动到对应行时可以看到告警或错误。
-    ![1.png](images/7/3.png)
-4. (进阶题) 请阅读 [可逆调试](https://undo.io/resources/reverse-debugging-whitepaper/) 并尝试创建一个可以工作的例子（使用 [`rr`](https://rr-project.org/) 或 [`RevPDB`](https://morepypy.blogspot.com/2016/07/reverse-debugging-for-python.html)）。
+4. (进阶题) 请阅读 [可逆调试](https://undo.io/resources/reverse-debugging-whitepaper/) 并尝试创建一个可以工作的例子（使用 [rr](https://rr-project.org/) 或 [RevPDB](https://morepypy.blogspot.com/2016/07/reverse-debugging-for-python.html)）。
     此例主要参考了 [debug-c-and-c++-programs-with-rr](https://developers.redhat.com/blog/2021/05/03/instant-replay-debugging-c-and-c-programs-with-rr#requirements_and_setup)，使用的代码是 [demo.c](demoCode/7/demo.c)
 
     ```shell
@@ -123,7 +122,7 @@
 
 ## 2. 性能分析
 
-1. [这里](/static/files/sorts.py) 有一些排序算法的实现。请使用 [`cProfile`](https://docs.python.org/3/library/profile.html) 和 [`line_profiler`](https://github.com/pyutils/line_profiler) 来比较插入排序和快速排序的性能。两种算法的瓶颈分别在哪里？然后使用 `memory_profiler` 来检查内存消耗，为什么插入排序更好一些？然后再看看原地排序版本的快排。附加题：使用 `perf` 来查看不同算法的循环次数及缓存命中及丢失情况。
+1. [这里](/static/files/sorts.py) 有一些排序算法的实现。请使用 [cProfile](https://docs.python.org/3/library/profile.html) 和 [line_profiler](https://github.com/pyutils/line_profiler) 来比较插入排序和快速排序的性能。两种算法的瓶颈分别在哪里？然后使用 `memory_profiler` 来检查内存消耗，为什么插入排序更好一些？然后再看看原地排序版本的快排。附加题：使用 `perf` 来查看不同算法的循环次数及缓存命中及丢失情况。
 
     ```bash
     python -m cProfile -s time sorts.py #按照执行时间排序
@@ -201,8 +200,7 @@
     pip install memory_profiler
     ```
 
-    同样需要添加 `@profile` 装饰器。
-    首先分析快速排序的内存使用情况：
+    同样需要添加 `@profile` 装饰器。首先分析快速排序的内存使用情况：
 
     ```bash
     pi@raspberrypi:~$ python -m memory_profiler sorts.py
@@ -353,7 +351,7 @@
        print(eval("fib9()"))
    ```
 
-   将代码拷贝到文件中使其变为一个可执行的程序。首先安装 [`pycallgraph`](http://pycallgraph.slowchop.com/en/master/) 和 [`graphviz`](http://graphviz.org/)(如果您能够执行 `dot`, 则说明已经安装了 GraphViz.)。并使用 `pycallgraph graphviz -- ./fib.py` 来执行代码并查看 `pycallgraph.png` 这个文件。`fib0` 被调用了多少次？我们可以通过记忆法来对其进行优化。将注释掉的部分放开，然后重新生成图片。这回每个 `fibN` 函数被调用了多少次？
+   将代码拷贝到文件中使其变为一个可执行的程序。首先安装 [pycallgraph](http://pycallgraph.slowchop.com/en/master/) 和 [graphviz](http://graphviz.org/)(如果您能够执行 `dot`, 则说明已经安装了 GraphViz.)。并使用 `pycallgraph graphviz -- ./fib.py` 来执行代码并查看 `pycallgraph.png` 这个文件。`fib0` 被调用了多少次？我们可以通过记忆法来对其进行优化。将注释掉的部分放开，然后重新生成图片。这回每个 `fibN` 函数被调用了多少次？
 
    setuptools 版本过高可能导致 pycallgraph 安装失败
 
@@ -375,7 +373,7 @@
 
 3. 我们经常会遇到的情况是某个我们希望去监听的端口已经被其他进程占用了。让我们通过进程的 PID 查找相应的进程。首先执行 `python -m http.server 4444` 启动一个最简单的 web 服务器来监听 `4444` 端口。在另外一个终端中，执行 `lsof | grep LISTEN` 打印出所有监听端口的进程及相应的端口。找到对应的 PID 然后使用 `kill <PID>` 停止该进程。  
 ![1.png](images/7/6.png)
-4. 限制进程资源也是一个非常有用的技术。执行 `stress -c 3` 并使用 `htop` 对 CPU 消耗进行可视化。现在，执行 `taskset --cpu-list 0,2 stress -c 3` 并可视化。`stress` 占用了 3 个 CPU 吗？为什么没有？阅读 [`man taskset`](http://man7.org/linux/man-pages/man1/taskset.1.html) 来寻找答案。附加题：使用 [`cgroups`](http://man7.org/linux/man-pages/man7/cgroups.7.html) 来实现相同的操作，限制 `stress -m` 的内存使用。  
+4. 限制进程资源也是一个非常有用的技术。执行 `stress -c 3` 并使用 `htop` 对 CPU 消耗进行可视化。现在，执行 `taskset --cpu-list 0,2 stress -c 3` 并可视化。`stress` 占用了 3 个 CPU 吗？为什么没有？阅读 [man taskset](http://man7.org/linux/man-pages/man1/taskset.1.html) 来寻找答案。附加题：使用 [cgroups](http://man7.org/linux/man-pages/man7/cgroups.7.html) 来实现相同的操作，限制 `stress -m` 的内存使用。  
     首先是设备正常运行状态下的资源占用情况：
     ![1.png](images/7/7.png)
     创建负载：
@@ -569,7 +567,6 @@
     ~ $ sudo rmdir /sys/fs/cgroup/test
     ```
 
-5. (进阶题) `curl ipinfo.io` 命令或执行 HTTP 请求并获取关于您 IP 的信息。打开 [Wireshark](https://www.wireshark.org/) 并抓取 `curl` 发起的请求和收到的回复报文。（提示：可以使用 `http` 进行过滤，只显示 HTTP 报文）
-    这里我使用的是 `curl www.baidu.com`，请求百度的首页并过滤了除 HTTP 之外的其他报文：
+5. (进阶题) `curl ipinfo.io` 命令或执行 HTTP 请求并获取关于您 IP 的信息。打开 [Wireshark](https://www.wireshark.org/) 并抓取 `curl` 发起的请求和收到的回复报文。（提示：可以使用 `http` 进行过滤，只显示 HTTP 报文）这里我使用的是 `curl www.baidu.com`，请求百度的首页并过滤了除 HTTP 之外的其他报文：
     ![1.png](images/7/14.png)  
     ![1.png](images/7/15.png)  

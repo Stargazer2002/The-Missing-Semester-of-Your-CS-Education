@@ -10,17 +10,17 @@
 
 ## 日程
 
-- 1/13: 课程概览与 shell
-- 1/14: Shell 工具和脚本  
-- 1/15: 编辑器 (Vim)  
-- 1/16: 数据整理  
-- 1/21: 命令行环境  
-- 1/22: 版本控制(Git)  
-- 1/23: 调试及性能分析  
-- 1/27: 元编程  
-- 1/28: 安全和密码学  
-- 1/29: 大杂烩  
-- 1/30: 提问&回答
+- 1/13: [课程概览与 shell](2020/Lecture1-Course_Overview&the_Shell.md)
+- 1/14: [Shell 工具和脚本](2020/Lecture2-Shell_Tools_and_Scripting.md)
+- 1/15: [编辑器 (Vim)](2020/Lecture3-Editors(Vim).md)
+- 1/16: [数据整理](2020/Lecture4-Data_Wrangling.md)
+- 1/21: [命令行环境](2020/Lecture5-Command-line_Environment.md)
+- 1/22: [版本控制(Git)](2020/Lecture6-Version_Control(Git).md)
+- 1/23: [调试及性能分析](2020/Lecture7-Debugging_and_Profiling.md)
+- 1/27: [元编程](2020/Lecture8-Metaprogramming.md)
+- 1/28: [安全和密码学](2020/Lecture9-Security_and_Cryptography.md)
+- 1/29: [大杂烩](2020/Lecture10-Potpourri.md)
+- 1/30: [提问&回答](2020/Lecture11-Q&A.md)
 
 讲座视频可以在 [YouTube](https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J) 上找到。
 
@@ -58,5 +58,7 @@
 ## 致谢
 
 感谢 Elaine Mello, Jim Cain 以及 [MIT Open Learning](https://openlearning.mit.edu/) 帮助我们录制讲座视频。
+
 感谢 Anthony Zolnik 和 [MIT AeroAstro](https://aeroastro.mit.edu/) 提供 A/V 设备。
+
 感谢 Brandi Adams 和 [MIT EECS](https://www.eecs.mit.edu/) 对本课程的支持。

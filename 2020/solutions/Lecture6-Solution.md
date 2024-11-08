@@ -190,8 +190,7 @@
     git config --global core.excludesfile ~/.gitignore .DS_Store
     ```
 
-7. 克隆 本课程网站的仓库，找找有没有错别字或其他可以改进的地方，在 GitHub 上发起拉取请求（Pull Request）；
-   首先 fork 本网站仓库，然后克隆 fork 后的仓库
+7. 克隆 本课程网站的仓库，找找有没有错别字或其他可以改进的地方，在 GitHub 上发起拉取请求（Pull Request）；首先 fork 本网站仓库，然后克隆 fork 后的仓库
 
     ```bash
     git clone https://github.com/hanxiaomax/missing-semester.git

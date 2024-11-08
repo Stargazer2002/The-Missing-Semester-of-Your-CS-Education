@@ -2,6 +2,8 @@
 
 [Lecture 1: Course Overview + The Shell (2020)](https://www.youtube.com/watch?v=Z56Jmr9Z34Q&list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J&index=1)
 
+[toc]
+
 ## 动机
 
 作为计算机科学家，我们都知道计算机最擅长帮助我们完成重复性的工作。但是我们却常常忘记这一点也适用于我们使用计算机的方式，而不仅仅是利用计算机程序去帮我们求解问题。在从事与计算机相关的工作时，我们有很多触手可及的工具可以帮助我们更高效的解决问题。但是我们中的大多数人实际上只利用了这些工具中的很少一部分，我们常常只是死记硬背一些如咒语般的命令，或是当我们卡住的时候，盲目地从网上复制粘贴一些命令。
@@ -12,7 +14,7 @@
 
 ## 课程结构
 
-本课程包含 11 个时长在一小时左右的讲座，每一个讲座都会关注一个[特定的主题](/missing-semester/2020/)。尽管这些讲座之间基本上是各自独立的，但随着课程的进行，我们会假定您已经掌握了之前的内容。每个讲座都有在线笔记供查阅，但是课上的很多内容并不会包含在笔记中。因此我们也会把课程录制下来发布到互联网上供大家观看学习。
+本课程包含 11 个时长在一小时左右的讲座，每一个讲座都会关注一个[特定的主题](/2020/)。尽管这些讲座之间基本上是各自独立的，但随着课程的进行，我们会假定您已经掌握了之前的内容。每个讲座都有在线笔记供查阅，但是课上的很多内容并不会包含在笔记中。因此我们也会把课程录制下来发布到互联网上供大家观看学习。
 
 我们希望能在这 11 个一小时讲座中涵盖大部分必须的内容，因此课程的信息密度是相当大的。为了能帮助您以自己的节奏来掌握讲座内容，每次课程都包含一组练习来帮助您掌握本节课的重点。课后我们会安排答疑的时间来回答您的问题。如果您参加的是在线课程，可以发送邮件到 [missing-semester@mit.edu](mailto:missing-semester@mit.edu) 来联系我们。
 
@@ -32,13 +34,13 @@
 
 当您打开终端时，您会看到一个提示符，它看起来一般是这个样子的：
 
-```console
+```shell
 missing:~$ 
 ```
 
 这是 shell 最主要的文本接口。它告诉你，你的主机名是 `missing` 并且您当前的工作目录（"current working directory"）或者说您当前所在的位置是 `~` (表示 "home")。 `$` 符号表示您现在的身份不是 root 用户（稍后会介绍）。在这个提示符中，您可以输入 _命令_ ，命令最终会被 shell 解析。最简单的命令是执行一个程序：
 
-```console
+```shell
 missing:~$ date
 Fri 10 Jan 2020 11:49:31 AM EST
 missing:~$ 
@@ -46,7 +48,7 @@ missing:~$
 
 这里，我们执行了 `date` 这个程序，不出意料地，它打印出了当前的日期和时间。然后，shell 等待我们输入其他命令。我们可以在执行命令的同时向程序传递 _参数_ ：
 
-```console
+```shell
 missing:~$ echo hello
 hello
 ```
@@ -55,7 +57,7 @@ hello
 
 但是，shell 是如何知道去哪里寻找 `date` 或 `echo` 的呢？其实，类似于 Python 或 Ruby，shell 是一个编程环境，所以它具备变量、条件、循环和函数（下一课进行讲解）。当你在 shell 中执行命令时，您实际上是在执行一段 shell 可以解释执行的简短代码。如果你要求 shell 执行某个指令，但是该指令并不是 shell 所了解的编程关键字，那么它会去咨询 _环境变量_  `$PATH`，它会列出当 shell 接到某条指令时，进行程序搜索的路径：
 
-```console
+```shell
 missing:~$ echo $PATH
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 missing:~$ which echo
@@ -70,7 +72,7 @@ missing:~$ /bin/echo $PATH
 
 shell 中的路径是一组被分割的目录，在 Linux 和 macOS 上使用 `/` 分割，而在 Windows 上是 `\`。路径 `/` 代表的是系统的根目录，所有的文件夹都包括在这个路径之下，在 Windows 上每个盘都有一个根目录（例如：`C:\`）。 我们假设您在学习本课程时使用的是 Linux 文件系统。如果某个路径以 `/` 开头，那么它是一个 _绝对路径_，其他的都是 _相对路径_ 。相对路径是指相对于当前工作目录的路径，当前工作目录可以使用 `pwd` 命令来获取。此外，切换目录需要使用 `cd` 命令。在路径中，`.` 表示的是当前目录，而 `..` 表示上级目录：
 
-```console
+```shell
 missing:~$ pwd
 /home/missing
 missing:~$ cd /home
@@ -95,7 +97,7 @@ hello
 
 为了查看指定目录下包含哪些文件，我们使用 `ls` 命令：
 
-```console
+```shell
 missing:~$ ls
 missing:~$ cd ..
 missing:/home$ ls
@@ -112,11 +114,11 @@ home
 
 除非我们利用第一个参数指定目录，否则 `ls` 会打印当前目录下的文件。大多数的命令接受标记和选项（带有值的标记），它们以 `-` 开头，并可以改变程序的行为。通常，在执行程序时使用 `-h` 或 `--help` 标记可以打印帮助信息，以便了解有哪些可用的标记或选项。例如，`ls --help` 的输出如下：
 
-```console
+```shell
   -l                         use a long listing format
 ```
 
-```console
+```shell
 missing:~$ ls -l /home
 drwxr-xr-x 1 missing  users  4096 Jun 15  2019 missing
 ```
@@ -127,7 +129,7 @@ drwxr-xr-x 1 missing  users  4096 Jun 15  2019 missing
 
 如果您想要知道关于程序参数、输入输出的信息，亦或是想要了解它们的工作方式，请试试 `man` 这个程序。它会接受一个程序名作为参数，然后将它的文档（用户手册）展现给您。注意，使用 `q` 可以退出该程序。
 
-```console
+```shell
 missing:~$ man ls
 ```
 
@@ -137,7 +139,7 @@ missing:~$ man ls
 
 最简单的重定向是 `< file` 和 `> file`。这两个命令可以将程序的输入输出流分别重定向到文件：
 
-```console
+```shell
 missing:~$ echo hello > hello.txt
 missing:~$ cat hello.txt
 hello
@@ -150,7 +152,7 @@ hello
 
 您还可以使用 `>>` 来向一个文件追加内容。使用管道（ _pipes_ ），我们能够更好的利用文件重定向。`|` 操作符允许我们将一个程序的输出和另外一个程序的输入连接起来：
 
-```console
+```shell
 missing:~$ ls -l / | tail -n1
 drwxr-xr-x 1 root  root  4096 Jun 20  2019 var
 missing:~$ curl --head --silent google.com | grep --ignore-case content-length | cut --delimiter=' ' -f2
@@ -167,13 +169,13 @@ missing:~$ curl --head --silent google.com | grep --ignore-case content-length |
 
 例如，您笔记本电脑的屏幕亮度写在 `brightness` 文件中，它位于
 
-```console
+```plaintext
 /sys/class/backlight
 ```
 
 通过将数值写入该文件，我们可以改变屏幕的亮度。现在，蹦到您脑袋里的第一个想法可能是：
 
-```console
+```shell
 $ sudo find -L /sys/class/backlight -maxdepth 2 -name '*brightness*'
 /sys/class/backlight/thinkpad_screen/brightness
 $ cd /sys/class/backlight/thinkpad_screen
@@ -186,13 +188,13 @@ open: Permission denied
 
 明白这一点后，我们可以这样操作：
 
-```console
+```shell
 $ echo 3 | sudo tee brightness
 ```
 
 此时打开 `/sys` 文件的是 `tee` 这个程序，并且该程序以 `root` 权限在运行，因此操作可以进行。这样您就可以在 `/sys` 中愉快地玩耍了，例如修改系统中各种 LED 的状态（路径可能会有所不同）：
 
-```console
+```shell
 $ echo 1 | sudo tee /sys/class/leds/input6::scrolllock/brightness
 ```
 

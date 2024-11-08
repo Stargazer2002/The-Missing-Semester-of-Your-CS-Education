@@ -2,6 +2,8 @@
 
 [Lecture 6: Version Control (git) (2020)](https://www.youtube.com/watch?v=2sjqTHE0zok&list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J&index=6)
 
+[toc]
+
 版本控制系统 (VCSs) 是一类用于追踪源代码（或其他文件、文件夹）改动的工具。顾名思义，这些工具可以帮助我们管理代码的修改历史；不仅如此，它还可以让协作编码变得更方便。VCS 通过一系列的快照将某个文件夹及其内容保存了起来，每个快照都包含了顶级目录中所有的文件或文件夹的完整状态。同时它还维护了快照创建者的信息以及每个快照的相关信息等等。
 
 为什么说版本控制系统非常有用？即使您只是一个人进行编程工作，它也可以帮您创建项目的快照，记录每个改动的目的、基于多分支并行开发等等。和别人协作开发时，它更是一个无价之宝，您可以看到别人对代码进行的修改，同时解决由于并行开发引起的冲突。
@@ -28,7 +30,7 @@
 
 Git 将顶级目录中的文件和文件夹作为集合，并通过一系列快照来管理其历史记录。在 Git 的术语里，文件被称作 Blob 对象（数据对象），也就是一组数据。目录则被称之为“树”，它将名字与 Blob 对象或树对象进行映射（使得目录中可以包含其他目录）。快照则是被追踪的最顶层的树。例如，一个树看起来可能是这样的：
 
-```git
+```plaintext
 <root> (tree)
 |
 +- foo (tree)
@@ -72,7 +74,7 @@ Git 中的提交是不可改变的。但这并不代表错误不能被修改，�
 
 以伪代码的形式来学习 Git 的数据模型，可能更加清晰：
 
-```git
+```pesudo
 // 文件就是一组数据
 type blob = array<byte>
 
@@ -100,7 +102,7 @@ type object = blob | tree | commit
 
 Git 在储存数据时，所有的对象都会基于它们的 [SHA-1 哈希](https://en.wikipedia.org/wiki/SHA-1) 进行寻址。
 
-```git
+```pesudo
 objects = map<string, object>
 
 def store(object):
@@ -132,7 +134,7 @@ git is wonderful
 
 针对这一问题，Git 的解决方法是给这些哈希值赋予人类可读的名字，也就是引用（references）。引用是指向提交的指针。与对象不同的是，它是可变的（引用可以被更新，指向新的提交）。例如，`master` 引用通常会指向主分支的最新一次提交。
 
-```git
+```pseudo
 references = map<string, string>
 
 def update_reference(name, id):
@@ -176,7 +178,7 @@ Git 处理这些场景的方法是使用一种叫做 “暂存区（staging area
 
 The `git init` command initializes a new Git repository, with repository metadata being stored in the `.git` directory:
 
-```console
+```bash
 $ mkdir myproject
 $ cd myproject
 $ git init
@@ -191,7 +193,7 @@ nothing to commit (create/copy files and use "git add" to track)
 
 How do we interpret this output? "No commits yet" basically means our version history is empty. Let's fix that.
 
-```console
+```bash
 $ echo "hello, git" > hello.txt
 $ git add hello.txt
 $ git status
@@ -216,7 +218,7 @@ Now that we have a non-empty version history, we can visualize the history. Visu
 
 The `git log` command visualizes history. By default, it shows a flattened version, which hides the graph structure. If you use a command like `git log --all --graph --decorate`, it will show you the full version history of the repository, visualized in graph form.
 
-```console
+```shell
 $ git log --all --graph --decorate
 * commit 4515d17a167bdef0a91ee7d50d75b12c9c2652aa (HEAD -> master)
   Author: Missing Semester <missing-semester@mit.edu>
@@ -227,7 +229,7 @@ $ git log --all --graph --decorate
 
 This doesn't look all that graph-like, because it only contains a single node. Let's make some more changes, author a new commit, and visualize the history once more.
 
-```console
+```bash
 $ echo "another line" >> hello.txt
 $ git status
 On branch master
@@ -253,7 +255,7 @@ $ git commit -m 'Add a line'
 
 Now, if we visualize the history again, we'll see some of the graph structure:
 
-```console
+```plaintext
 * commit 35f60a825be0106036dd2fbc7657598eb7b04c67 (HEAD -> master)
 | Author: Missing Semester <missing-semester@mit.edu>
 | Date:   Tue Jan 21 22:26:20 2020 -0500
@@ -271,7 +273,7 @@ Also, note that it shows the current HEAD, along with the current branch (master
 
 We can look at old versions using the `git checkout` command.
 
-```console
+```shell
 $ git checkout 4515d17  # previous commit hash; yours will be different
 Note: checking out '4515d17'.
 
@@ -297,7 +299,7 @@ another line
 
 Git can show you how files have evolved (differences, or diffs) using the `git diff` command:
 
-```console
+```shell
 $ git diff 4515d17 hello.txt
 diff --git c/hello.txt w/hello.txt
 index 94bab17..f0013b2 100644
@@ -368,10 +370,7 @@ Merging is the opposite of branching: it allows you to combine forked version hi
 - **图形用户界面**: Git 的 [图形用户界面客户端](https://git-scm.com/downloads/guis) 有很多，但是我们自己并不使用这些图形用户界面的客户端，我们选择使用命令行接口
 - **Shell 集成**: 将 Git 状态集成到您的 shell 中会非常方便。([zsh](https://github.com/olivierverdier/zsh-git-prompt), [bash](https://github.com/magicmonty/bash-git-prompt))。[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) 这样的框架中一般已经集成了这一功能
 - **编辑器集成**: 和上面一条类似，将 Git 集成到编辑器中好处多多。[fugitive.vim](https://github.com/tpope/vim-fugitive) 是 Vim 中集成 Git 的常用插件
-- **工作流**: 我们已经讲解了数据模型与一些基础命令，但还没讨论到进行大型项目时的一些惯例 (
-有 [很多](https://nvie.com/posts/a-successful-git-branching-model/)
-[不同的](https://www.endoflineblog.com/gitflow-considered-harmful)
-[处理方法](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow))
+- **工作流**: 我们已经讲解了数据模型与一些基础命令，但还没讨论到进行大型项目时的一些惯例 (有 [很多](https://nvie.com/posts/a-successful-git-branching-model/) [不同的](https://www.endoflineblog.com/gitflow-considered-harmful) [处理方法](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow))
 - **GitHub**: Git 并不等同于 GitHub。 在 GitHub 中您需要使用一个被称作 [拉取请求（pull request）](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) 的方法来向其他项目贡献代码
 - **其他 Git 提供商**: GitHub 并不是唯一的。还有像 [GitLab](https://about.gitlab.com/) 和 [BitBucket](https://bitbucket.org/) 这样的平台。
 

@@ -2,6 +2,8 @@
 
 [Lecture 3: Editors (vim) (2020)](https://www.youtube.com/watch?v=a6Q8Na575qc&list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J&index=3)
 
+[toc]
+
 写作和写代码其实是两项非常不同的活动。当我们编程的时候，会经常在文件间进行切换、阅读、浏览和修改代码，而不是连续编写一大段的文字。因此代码编辑器和文本编辑器是很不同的两种工具（例如微软的 Word 与 Visual Studio Code）。
 
 作为程序员，我们大部分时间都花在代码编辑上，所以花点时间掌握某个适合自己的编辑器是非常值得的。通常学习使用一个新的编辑器包含以下步骤：
@@ -170,7 +172,7 @@ def main():
 - 主函数没有被调用
   - `G` 文件尾
   - `o` 向下打开一个新行
-  - 输入 "if \_\_name\_\_ ..."
+  - 输入 "if **name** ..."
 - 从 0 而不是 1 开始
   - 搜索 `/range`
   - `ww` 向后移动两个词
@@ -233,8 +235,7 @@ set editing-mode vi
 
 ### 其他
 
-甚至有 Vim 的网页浏览快捷键 [browsers](http://vim.wikia.com/wiki/Vim_key_bindings_for_web_browsers), 受欢迎的有
-用于 Google Chrome 的 [Vimium](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en) 和用于 Firefox 的 [Tridactyl](https://github.com/tridactyl/tridactyl)。你甚至可以在 [Jupyter notebooks](https://github.com/lambdalisue/jupyter-vim-binding) 中用 Vim 快捷键。[这个列表](https://reversed.top/2016-08-13/big-list-of-vim-like-software) 中列举了支持类 vim 键位绑定的软件。
+甚至有 Vim 的网页浏览快捷键 [browsers](http://vim.wikia.com/wiki/Vim_key_bindings_for_web_browsers), 受欢迎的有用于 Google Chrome 的 [Vimium](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en) 和用于 Firefox 的 [Tridactyl](https://github.com/tridactyl/tridactyl)。你甚至可以在 [Jupyter notebooks](https://github.com/lambdalisue/jupyter-vim-binding) 中用 Vim 快捷键。[这个列表](https://reversed.top/2016-08-13/big-list-of-vim-like-software) 中列举了支持类 vim 键位绑定的软件。
 
 ## Vim 进阶
 
@@ -313,4 +314,4 @@ set editing-mode vi
 5. 下个月用 Vim 完成 *所有的* 文件编辑。每当不够高效的时候，或者你感觉 “一定有一个更好的方式”时，尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。
 6. 在其他工具中设置 Vim 快捷键 （见上面的操作指南）。
 7. 进一步自定义你的 `~/.vimrc` 和安装更多插件。
-8. （高阶）用 Vim 宏将 XML 转换到 JSON ([例子文件](/2020/files/example-data.xml))。尝试着先完全自己做，但是在你卡住的时候可以查看上面宏章节。
+8. （高阶）用 Vim 宏将 XML 转换到 JSON ([例子文件](/2020/files/example-data.xml))。尝试着先完全自己做，但是在你卡住的时候可以查看上面[宏](#宏)章节。

@@ -69,7 +69,7 @@ WantedBy=multi-user.target
 # graphical.target在multi-user.target的基础上运行和GUI相关的服务
 ```
 
-如果你只是想定期运行一些程序，可以直接使用 [`cron`](https://www.man7.org/linux/man-pages/man8/cron.8.html)。它是一个系统内置的，用来执行定期任务的守护进程。
+如果你只是想定期运行一些程序，可以直接使用 [cron](https://www.man7.org/linux/man-pages/man8/cron.8.html)。它是一个系统内置的，用来执行定期任务的守护进程。
 
 ## FUSE
 
@@ -99,7 +99,7 @@ FUSE 可以用于实现如：一个将所有文件系统操作都使用 SSH 转�
 
 备份不限制于备份在本地计算机上的文件。云端应用的重大发展使得我们很多的数据只存储在云端。当我们无法登录这些应用，在云端存储的网络邮件，社交网络上的照片，流媒体音乐播放列表，以及在线文档等等都会随之丢失。用户应该有这些数据的离线备份，而且已经有项目可以帮助下载并存储它们。
 
-如果想要了解更多具体内容，请参考本课程 2019 年关于备份的课堂笔记。
+如果想要了解更多具体内容，请参考本课程 2019 年关于备份的[课堂笔记](https://missing-semester-cn.github.io/2019/backups/)。
 
 ## API（应用程序接口）
 
@@ -107,7 +107,7 @@ FUSE 可以用于实现如：一个将所有文件系统操作都使用 SSH 转�
 
 这些 API 大多具有类似的格式。它们的结构化 URL 通常使用 `api.service.com` 作为根路径，用户可以访问不同的子路径来访问需要调用的操作，以及添加查询参数使 API 返回符合查询参数条件的结果。
 
-以美国天气数据为例，为了获得某个地点的天气数据，你可以发送一个 GET 请求（比如使用 `curl`）到 [`https://api.weather.gov/points/42.3604,-71.094`](https://api.weather.gov/points/42.3604,-71.094)。返回中会包括一系列用于获取特定信息（比如小时预报、气象观察站信息等）的 URL。通常这些返回都是 `JSON` 格式，你可以使用 [`jq`](https://stedolan.github.io/jq/) 等工具来选取需要的部分。
+以美国天气数据为例，为了获得某个地点的天气数据，你可以发送一个 GET 请求（比如使用 `curl`）到 [https://api.weather.gov/points/42.3604,-71.094](https://api.weather.gov/points/42.3604,-71.094)。返回中会包括一系列用于获取特定信息（比如小时预报、气象观察站信息等）的 URL。通常这些返回都是 `JSON` 格式，你可以使用 [jq](https://stedolan.github.io/jq/) 等工具来选取需要的部分。
 
 有些需要认证的 API 通常要求用户在请求中加入某种私密令牌（secret token）来完成认证。请阅读你想访问的 API 所提供的文档来确定它请求的认证方式，但是其实大多数 API 都会使用 [OAuth](https://www.oauth.com/)。OAuth 通过向用户提供一系列仅可用于该 API 特定功能的私密令牌进行校验。因为使用了有效 OAuth 令牌的请求在 API 看来就是用户本人发出的请求，所以请一定保管好这些私密令牌。否则其他人就可以冒用你的身份进行任何你可以在这个 API 上进行的操作。
 
@@ -125,9 +125,12 @@ FUSE 可以用于实现如：一个将所有文件系统操作都使用 SSH 转�
 - 会造成破坏性结果的工具一般默认进行非递归的操作，但是支持使用“递归”（recursive）标志函数（通常是 `-r`）。
 - 有的时候你可能需要向工具传入一个 _看上去_ 像标志参数的普通参数，比如：
   - 使用 `rm` 删除一个叫 `-r` 的文件；
-  - 在通过一个程序运行另一个程序的时候（`ssh machine foo`），向内层的程序（`foo`）传递一个标志参数。这时候你可以使用特殊参数 `--` 让某个程序 _停止处理_ `--` 后面出现的标志参数以及选项（以 `-` 开头的内容）：
-    - `rm -- -r` 会让 `rm` 将 `-r` 当作文件名；
-    - `ssh machine --for-ssh -- foo --for-foo` 的 `--` 会让 `ssh` 知道 `--for-foo` 不是 `ssh` 的标志参数。
+  - 在通过一个程序运行另一个程序的时候（`ssh machine foo`），向内层的程序（`foo`）传递一个标志参数。
+
+  这时候你可以使用特殊参数 `--` 让某个程序 _停止处理_ `--` 后面出现的标志参数以及选项（以 `-` 开头的内容）：
+
+  - `rm -- -r` 会让 `rm` 将 `-r` 当作文件名；
+  - `ssh machine --for-ssh -- foo --for-foo` 的 `--` 会让 `ssh` 知道 `--for-foo` 不是 `ssh` 的标志参数。
 
 ## 窗口管理器
 
@@ -229,4 +232,5 @@ MIT CSAIL 的成员可以使用 [CSAIL OpenStack instance](https://tig.csail.mit
 
 - 创建一个 [议题（issue）](https://help.github.com/en/github/managing-your-work-on-github/creating-an-issue)。议题可以用来反映软件运行的问题或者请求新的功能。创建议题并不需要创建者阅读或者编写代码，所以它是一个轻量化的贡献方式。高质量的问题报告对于开发者十分重要。在现有的议题发表评论也可以对项目的开发作出贡献。
 - 使用 [拉取请求（pull request）](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) 提交代码更改。由于涉及到阅读和编写代码，提交拉取请求总的来说比创建议题更加深入。拉取请求是请求别人把你自己的代码拉取（且合并）到他们的仓库里。很多开源项目仅允许认证的管理者管理项目代码，所以一般需要 [复刻（fork）](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) 这些项目的上游仓库（upstream repository），在你的 Github 账号下创建一个内容完全相同但是由你控制的复刻仓库。这样你就可以在这个复刻仓库自由创建新的分支并推送修复问题或者实现新功能的代码。完成修改以后再回到开源项目的 Github 页面 [创建一个拉取请求](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)。
+
 提交请求后，项目管理者会和你交流拉取请求里的代码并给出反馈。如果没有问题，你的代码会和上游仓库中的代码合并。很多大的开源项目会提供贡献指南，容易上手的议题，甚至专门的指导项目来帮助参与者熟悉这些项目。

@@ -2,8 +2,7 @@
 
 ## 1. 熵
 
-假设一个密码是从四个小写的单词拼接组成，每个单词都是从一个含有 10 万单词的字典中随机选择，且每个单词选中的概率相同。 一个符合这样构造的例子是 `correcthorsebatterystaple` 。这个密码有多少比特的熵？
-假设另一个密码是用八个随机的大小写字母或数字组成。一个符合这样构造的例子是 `rg8Ql34g` 。这个密码又有多少比特的熵？
+假设一个密码是从四个小写的单词拼接组成，每个单词都是从一个含有 10 万单词的字典中随机选择，且每个单词选中的概率相同。 一个符合这样构造的例子是 `correcthorsebatterystaple` 。这个密码有多少比特的熵？假设另一个密码是用八个随机的大小写字母或数字组成。一个符合这样构造的例子是 `rg8Ql34g` 。这个密码又有多少比特的熵？
 
 ```plaintext
 Entropy = log_2(100000^4) = 66 #correcthorsebatterystaple
@@ -18,10 +17,11 @@ Entropy = log_2((26+26+10)^8) = 48 #rg8Ql34g
 哪一个密码更强？假设一个攻击者每秒可以尝试 1 万个密码，这个攻击者需要多久可以分别破解上述两个密码？
 
 第一个更强。
-因为每个密码的概率是相同，所以平均而言，需要的破解时间约为尝试所有可能密码所花时间的一半（概率论期望值的简单应用，记所有可能密码个数为 x, 每年尝试的密码数为 y, 破解所需的平均时间为：
-$$\frac{1}{x\cdot y}(1+2+\cdots +x)=\frac{1}{x}\times \frac{(1+x)\times x/2}{y}=\frac{1}{2}\times\frac{1+x}{y}$$
+
+因为每个密码的概率是相同，所以平均而言，需要的破解时间约为尝试所有可能密码所花时间的一半（概率论期望值的简单应用，记所有可能密码个数为 x, 每年尝试的密码数为 y, 破解所需的平均时间为：$\frac{1}{x\cdot y}(1+2+\cdots +x)=\frac{1}{x}\times \frac{(1+x)\times x/2}{y}=\frac{1}{2}\times\frac{1+x}{y}$）
 
 对于第一个密码：$100,000^4/10^4/(365\times 24\times 3600)/2=1.085亿年$
+
 对于第二个密码：$62^8/10^4/(365\times 24\times 3600)/2=346年$
 
 ## 2. 密码散列函数
@@ -103,15 +103,15 @@ $?
     ssh-keygen -t ed25519 
     ```
 
-2. [配置 GPG](https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages)。
-Linux 系统可以直接按照上面的教程操作，MacOS 上的操作过程如下
+2. [配置 GPG](https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages)。Linux 系统可以直接按照上面的教程操作，MacOS 上的操作过程如下
 
     ```bash
     $ brew install gpg
     $ gpg --gen-key
     ```
 
-3. 给 Anish 发送一封加密的电子邮件（[Anish 的公钥](https://keybase.io/anish)）。导入 Anish 发布的公钥，并完成验证
+3. 给 Anish 发送一封加密的电子邮件（[Anish 的公钥](https://keybase.io/anish)）。
+导入 Anish 发布的公钥，并完成验证
 
     ```shell
     ~ $ curl https://keybase.io/anish/pgp_keys.asc | gpg --import   

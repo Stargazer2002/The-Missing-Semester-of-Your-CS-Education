@@ -2,7 +2,9 @@
 
 [Lecture 9: Security and Cryptography (2020)](https://www.youtube.com/watch?v=tjwobAmnKTo&list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J&index=9)
 
-去年的这节课我们从计算机 _用户_ 的角度探讨了增强隐私保护和安全的方法。今年我们将关注比如散列函数、密钥生成函数、对称/非对称密码体系这些安全和密码学的概念是如何应用于前几节课所学到的工具（Git 和 SSH）中的。
+[toc]
+
+去年的[这节课](https://missing-semester-cn.github.io/2019/security/)我们从计算机 _用户_ 的角度探讨了增强隐私保护和安全的方法。今年我们将关注比如散列函数、密钥生成函数、对称/非对称密码体系这些安全和密码学的概念是如何应用于前几节课所学到的工具（Git 和 SSH）中的。
 
 本课程不能作为计算机系统安全 ([6.858](https://css.csail.mit.edu/6.858/)) 或者密码学 ([6.857](https://courses.csail.mit.edu/6.857/) 以及 6.875) 的替代。如果你不是密码学的专家，请不要 [试图创造或者修改加密算法](https://www.schneier.com/blog/archives/2015/05/amateurs_produc.html)。从事和计算机系统安全相关的工作同理。
 
@@ -32,7 +34,7 @@ hash(value: array<byte>) -> vector<byte, N>  (N对于该函数固定)
 
 [SHA-1](https://en.wikipedia.org/wiki/SHA-1) 是 Git 中使用的一种散列函数，它可以将任意大小的输入映射为一个 160 比特（可被 40 位十六进制数表示）的输出。下面我们用 `sha1sum` 命令来测试 SHA1 对几个字符串的输出：
 
-```console
+```bash
 $ printf 'hello' | sha1sum
 aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
 $ printf 'hello' | sha1sum
@@ -63,7 +65,9 @@ f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0
 ### 密钥生成函数的应用
 
 - 从密码生成可以在其他加密算法中使用的密钥，比如对称加密算法（见下）。
-- 存储登录凭证时不可直接存储明文密码。正确的方法是针对每个用户随机生成一个 [盐](https://en.wikipedia.org/wiki/Salt_(cryptography)) `salt = random()`，并存储盐，以及密钥生成函数对连接了盐的明文密码生成的哈希值 `KDF(password + salt)`。在验证登录请求时，使用输入的密码连接存储的盐重新计算哈希值 `KDF(input + salt)`，并与存储的哈希值对比。
+- 存储登录凭证时不可直接存储明文密码。
+正确的方法是针对每个用户随机生成一个 [盐](https://en.wikipedia.org/wiki/Salt_(cryptography)) `salt = random()`，并存储盐，以及密钥生成函数对连接了盐的明文密码生成的哈希值 `KDF(password + salt)`。
+在验证登录请求时，使用输入的密码连接存储的盐重新计算哈希值 `KDF(input + salt)`，并与存储的哈希值对比。
 
 ## 对称加密
 
@@ -83,8 +87,7 @@ decrypt(ciphertext: array<byte>, key) -> array<byte>  (输出明文)
 
 ### 对称加密的应用
 
-- 加密不信任的云服务上存储的文件。对称加密和密钥生成函数配合起来，就可以使用密码加密文件：
-将密码输入密钥生成函数生成密钥 `key = KDF(passphrase)`，然后存储 `encrypt(file, key)`。
+- 加密不信任的云服务上存储的文件。对称加密和密钥生成函数配合起来，就可以使用密码加密文件：将密码输入密钥生成函数生成密钥 `key = KDF(passphrase)`，然后存储 `encrypt(file, key)`。
 
 ## 非对称加密
 
@@ -102,7 +105,9 @@ sign(message: array<byte>, private key) -> array<byte>  (生成签名)
 verify(message: array<byte>, signature: array<byte>, public key) -> bool  (验证签名是否是由和这个公钥相关的私钥生成的)
 ```
 
-非对称的加密/解密方法和对称的加密/解密方法有类似的特征。信息在非对称加密中使用 _公钥_ 加密，且输出的密文很难在不知道 _私钥_ 的情况下得出明文。解密方法 `decrypt()` 有明显的正确性。给定密文及私钥，解密方法一定会输出明文：`decrypt(encrypt(m, public key), private key) = m`。
+非对称的加密/解密方法和对称的加密/解密方法有类似的特征。
+信息在非对称加密中使用 _公钥_ 加密，且输出的密文很难在不知道 _私钥_ 的情况下得出明文。
+解密方法 `decrypt()` 有明显的正确性。给定密文及私钥，解密方法一定会输出明文：`decrypt(encrypt(m, public key), private key) = m`。
 
 对称加密和非对称加密可以类比为机械锁。对称加密就好比一个防盗门：只要是有钥匙的人都可以开门或者锁门。非对称加密好比一个可以拿下来的挂锁。你可以把打开状态的挂锁（公钥）给任何一个人并保留唯一的钥匙（私钥）。这样他们将给你的信息装进盒子里并用这个挂锁锁上以后，只有你可以用保留的钥匙开锁。
 
@@ -110,10 +115,8 @@ verify(message: array<byte>, signature: array<byte>, public key) -> bool  (验�
 
 ### 非对称加密的应用
 
-- [PGP 电子邮件加密](https://en.wikipedia.org/wiki/Pretty_Good_Privacy)：用户可以将所使用的公钥在线发布，比如：PGP 密钥服务器或
-[Keybase](https://keybase.io/)。任何人都可以向他们发送加密的电子邮件。
-- 聊天加密：像 [Signal](https://signal.org/) 和
-[Keybase](https://keybase.io/) 使用非对称密钥来建立私密聊天。
+- [PGP 电子邮件加密](https://en.wikipedia.org/wiki/Pretty_Good_Privacy)：用户可以将所使用的公钥在线发布，比如：PGP 密钥服务器或 [Keybase](https://keybase.io/)。任何人都可以向他们发送加密的电子邮件。
+- 聊天加密：像 [Signal](https://signal.org/) 和 [Keybase](https://keybase.io/) 使用非对称密钥来建立私密聊天。
 - 软件签名：Git 支持用户对提交(commit)和标签(tag)进行 GPG 签名。任何人都可以使用软件开发者公布的签名公钥验证下载的已签名软件。
 
 ### 密钥分发
@@ -167,7 +170,7 @@ extra topics, if there's time security concepts, tips
 
 ## 资源
 
-- 去年的讲稿: 更注重于计算机用户可以如何增强隐私保护和安全
+- [去年的讲稿](https://missing-semester-cn.github.io/2019/security/): 更注重于计算机用户可以如何增强隐私保护和安全
 - [Cryptographic Right Answers](https://latacora.micro.blog/2018/04/03/cryptographic-right-answers.html): 解答了在一些应用环境下“应该使用什么加密？”的问题
 
 ## 课后练习

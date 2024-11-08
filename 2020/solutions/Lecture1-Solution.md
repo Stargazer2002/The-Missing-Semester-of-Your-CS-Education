@@ -2,11 +2,9 @@
 
 1. 在 /tmp 下新建一个名为 missing 的文件夹。
     ![1.png](images/1/1.png)
-2. 用 man 查看程序 touch 的使用手册。
-    `man touch`
+2. 用 man 查看程序 touch 的使用手册。`man touch`
     ![2.png](images/1/2.png)
-3. 用 touch 在 missing 文件夹中新建一个叫 semester 的文件。
-    `touch semester`
+3. 用 touch 在 missing 文件夹中新建一个叫 semester 的文件。`touch semester`
 4. 将以下内容一行一行地写入 semester 文件：
 
     ```console

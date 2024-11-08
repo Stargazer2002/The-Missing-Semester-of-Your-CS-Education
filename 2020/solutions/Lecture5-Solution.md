@@ -99,12 +99,7 @@
 
 让我们帮助您进一步学习配置文件：
 
-为您的配置文件新建一个文件夹，并设置好版本控制
-在其中添加至少一个配置文件，比如说您的 shell，在其中包含一些自定义设置（可以从设置 $PS1 开始）。
-建立一种在新设备进行快速安装配置的方法（无需手动操作）。最简单的方法是写一个 shell 脚本对每个文件使用 ln -s，也可以使用专用工具
-在新的虚拟机上测试该安装脚本。
-将您现有的所有配置文件移动到项目仓库里。
-将项目发布到 GitHub。
+为您的配置文件新建一个文件夹，并设置好版本控制，在其中添加至少一个配置文件，比如说您的 shell，在其中包含一些自定义设置（可以从设置 $PS1 开始）。建立一种在新设备进行快速安装配置的方法（无需手动操作）。最简单的方法是写一个 shell 脚本对每个文件使用 ln -s，也可以使用专用工具在新的虚拟机上测试该安装脚本。将您现有的所有配置文件移动到项目仓库里。将项目发布到 GitHub。
 
    ```bash
    ~ $ mkdir ~/gits/dotfiles   # gits 目录是创建用来存放所有 git 及 github 仓库的目录
@@ -196,15 +191,14 @@
    ![1.png](images/5/1.png)
 5. 使用 `sudo vim /etc/ssh/sshd_config` 编辑 SSH 服务器配置，通过修改 `PasswordAuthentication` 的值来禁用密码验证。通过修改 `PermitRootLogin` 的值来禁用 root 登录。然后使用 `sudo service sshd restart` 重启 ssh 服务器，然后重新尝试。
 
-   ```ini
+   ```ssh
    #注意是服务器的 sshd 配置
    pi@raspberrypi:~$ vim /etc/ssh/sshd_config
    ```
 
    修改：
    - `PasswordAuthentication` 的值为 no
-   - `PermitRootLogin` 的值为 no
-   然后重启服务
+   - `PermitRootLogin` 的值为 no 然后重启服务
 
    ```bash
    #for MacOS

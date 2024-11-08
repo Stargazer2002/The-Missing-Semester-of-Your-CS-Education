@@ -2,7 +2,7 @@
 
 1. 完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行） 终端窗口看起来最好。
 
-    ```bash
+    ```plaintext
     vimtutor
     ```
 
@@ -49,7 +49,7 @@
 
     3. 在 vim 命令行中执行 `:PlugInstall`
         ![1.png](images/3/3.png)
-8. (高阶)用 Vim 宏将 XML 转换到 JSON ([例子文件](files/example-data.xml))。 尝试着先完全自己做，但是在你卡住的时候可以查看上面宏章节。  
+8. (高阶)用 Vim 宏将 XML 转换到 JSON ([例子文件](/2020/files/example-data.xml))。 尝试着先完全自己做，但是在你卡住的时候可以查看上面宏章节。  
 
     可以先查看 [转化后的 JSON 文件](demoCode/3/example-data.json)，了解最终的转换效果。
 
@@ -72,7 +72,7 @@
         - `f<C"`：查找下一个 `<`，由于 xml 文件的特征，此时匹配到的是刚才修改的 `<name>` 对应的 `</name>` 的 `<`；然后，将当前位置到本行末尾的内容删除，同时插入 `"`
         - `<Esc>`：回到正常模式
         - `q`：停止录制，寄存器 `e` 完成
-        - 寄存器 `e` 的效果示例：将 `<name>Mike</name>` 修改为 `"name": "Mike"`  
+            - 寄存器 `e` 的效果示例：将 `<name>Mike</name>` 修改为 `"name": "Mike"`  
     3. 录制寄存器 `p`，实现对 `<person>` 标签的处理
         - `gg`：跳转到文件开头（本例中，正好处于一个 `<person>` 标签）
         - 接下来，录制宏（寄存器 `p`）

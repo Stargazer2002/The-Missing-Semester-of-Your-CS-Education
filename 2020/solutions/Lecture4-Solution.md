@@ -66,25 +66,25 @@
    可以自动创建一个后缀为 `.bak` 的备份文件。
 4. 找出您最近十次开机的开机时间平均数、中位数和最长时间。在 Linux 上需要用到 `journalctl` ，而在 macOS 上使用 `log show`。找到每次起到开始和结束时的时间戳。在 Linux 上类似这样操作：
 
-   ```bash
+   ```plaintext
    Logs begin at ...
    ```
 
    和
 
-   ```bash
+   ```plaintext
    systemd[577]: Startup finished in ...
    ```
 
    在 macOS 上, [查找](https://eclecticlight.co/2018/03/21/macos-unified-log-3-finding-your-way/):
 
-   ```bash
+   ```plaintext
    === system boot:
    ```
 
    和
 
-   ```bash
+   ```plaintext
    Previous shutdown cause: 5
    ```
 
@@ -153,15 +153,14 @@
    [1] 14.2915
    ```
 
-5. 查看之前三次重启启动信息中不同的部分(参见 `journalctl` 的 `-b` 选项)。将这一任务分为几个步骤，首先获取之前三次启动的启动日志，也许获取启动日志的命令就有合适的选项可以帮助您提取前三次启动的日志，亦或者您可以使用 `sed '0,/STRING/d'` 来删除 `STRING` 匹配到的字符串前面的全部内容。然后，过滤掉每次都不相同的部分，例如时间戳。下一步，重复记录输入行并对其计数(可以使用 `uniq` )。最后，删除所有出现过 3 次的内容（因为这些内容上三次启动日志中的重复部分）。
-简单修改上面使用的 `getlog.sh`，获取最近三次的日志，然后使用下面的命令：
+5. 查看之前三次重启启动信息中不同的部分(参见 `journalctl` 的 `-b` 选项)。将这一任务分为几个步骤，首先获取之前三次启动的启动日志，也许获取启动日志的命令就有合适的选项可以帮助您提取前三次启动的日志，亦或者您可以使用 `sed '0,/STRING/d'` 来删除 `STRING` 匹配到的字符串前面的全部内容。然后，过滤掉每次都不相同的部分，例如时间戳。下一步，重复记录输入行并对其计数(可以使用 `uniq` )。最后，删除所有出现过 3 次的内容（因为这些内容上三次启动日志中的重复部分）。简单修改上面使用的 `getlog.sh`，获取最近三次的日志，然后使用下面的命令：
 
    ```bash
    #注意 uniq 只能过滤相邻的行，所以必须先排序
    cat last3start.txt | sed -E "s/.*pi\ (.*)/\1/" | sort | uniq -c | sort | awk '$1!=3  { print }'
    ```
 
-6. 在网上找一个类似 [这个](https://stats.wikimedia.org/EN/TablesWikipediaZZ.htm) 或者 [这个](https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/tables/table-1) 的数据集。或者从 [这里](https://www.springboard.com/blog/free-public-data-sets-data-science-project/) 找一些。使用 `curl` 获取数据集并提取其中两列数据，如果您想要获取的是 HTML 数据，那么 [`pup`](https://github.com/EricChiang/pup) 可能会更有帮助。对于 JSON 类型的数据，可以试试 [`jq`](https://stedolan.github.io/jq/) 。请使用一条指令来找出其中一列的最大值和最小值，用另外一条指令计算两列之间差的总和。
+6. 在网上找一个类似 [这个](https://stats.wikimedia.org/EN/TablesWikipediaZZ.htm) 或者 [这个](https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/tables/table-1) 的数据集。或者从 [这里](https://www.springboard.com/blog/free-public-data-sets-data-science-project/) 找一些。使用 `curl` 获取数据集并提取其中两列数据，如果您想要获取的是 HTML 数据，那么 [pup](https://github.com/EricChiang/pup) 可能会更有帮助。对于 JSON 类型的数据，可以试试 [jq](https://stedolan.github.io/jq/) 。请使用一条指令来找出其中一列的最大值和最小值，用另外一条指令计算两列之间差的总和。
 
    ```shell
    ~$ curl 'https://stats.wikimedia.org/EN/TablesWikipediaZZ.htm#wikipedians' \
@@ -187,7 +186,7 @@
    - `|sed "1,12d"`：去掉前 12 行（包含表格的表头）
    - `|head -n -3`：去掉最后 3 行（包含非数据的内容）（注意：部分操作系统可能不支持该用法，最笨拙的替换实现方式是：`|sed "$d"|sed "$d"|sed "$d"`，即执行 3 次删除最后一行的操作）
    - `|sed -E 's/(<[^>]*>)+/ /g'`：使用正则匹配，将所有相邻的多个 html 标签（格式行如 `< tag >` ）替换为空格
-   - `|sed 's/ &nbsp;/ -/g'`：原表格中部分没有数据的单元格是以 `&nbsp;` 填充的，将其替换为 ` -`，避免在对数据操作时发生窜列的情况
+   - `|sed 's/ &nbsp;/ -/g'`：原表格中部分没有数据的单元格是以 `&nbsp;` 填充的，将其替换为 `-`，避免在对数据操作时发生窜列的情况
    - `|sed 's/&nbsp;//g'`：原表格中部分单元格内的空格也是用 `&nbsp;` 表示的，将其全部删除（不影响数据处理）
 
    ```shell
