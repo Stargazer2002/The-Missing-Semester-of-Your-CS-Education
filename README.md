@@ -42,7 +42,8 @@
 
 ## 译文
 
-- [English](https://missing.csail.mit.edu)
+- [English](https://missing.csail.mit.edu/)
+- [简体中文](https://missing-semester-cn.github.io/)
 - [繁体中文](https://missing-semester-zh-hant.github.io/)
 - [Japanese](https://missing-semester-jp.github.io/)
 - [Korean](https://missing-semester-kr.github.io/)
