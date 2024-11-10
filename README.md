@@ -1,4 +1,4 @@
-# The Missing Semester of Your CS Education Chinese (Simplified) Translation
+# The Missing Semester of Your CS Education 2020 Chinese (Simplified) Translation
 
 大学里的计算机课程通常专注于讲授从操作系统到机器学习这些学院派的课程或主题，而对于如何精通工具这一主题则往往会留给学生自行探索。在这个系列课程中，我们讲授命令行、强大的文本编辑器的使用、使用版本控制系统提供的多种特性等等。学生在他们受教育阶段就会和这些工具朝夕相处（在他们的职业生涯中更是这样）。
 
